@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="350" viewBox="0 0 1200 350" role="img" aria-labelledby="title">
+<title id="title">Laboratorio de Grafos y Búsquedas</title>
+<rect width="1200" height="350" rx="22" fill="#f5f3ec"/>
+<path d="M22 0h1156a22 22 0 0 1 22 22v8H0v-8A22 22 0 0 1 22 0" fill="#184b3a"/>
+<g font-family="system-ui, sans-serif" fill="#17201c">
+<text x="56" y="100" font-size="21" font-weight="700" letter-spacing="3" fill="#184b3a">CIENCIAS DE LA COMPUTACIÓN 2</text>
+<text x="54" y="169" font-size="55" font-weight="750">Laboratorio de</text>
+<text x="54" y="235" font-size="55" font-weight="750">Grafos y Búsquedas</text>
+<text x="56" y="292" font-size="23" fill="#414e45">Universidad Distrital Francisco José de Caldas</text>
+</g>
+<g stroke="#648475" stroke-width="3" fill="none">
+<path d="M790 190L858 95L1047 77L1126 212L992 271L790 190L947 157L858 95M947 157L1047 77M947 157L1126 212M947 157L992 271"/>
+</g>
+<g fill="#fffefa" stroke="#184b3a" stroke-width="3">
+<circle cx="790" cy="190" r="12"/><circle cx="858" cy="95" r="12"/><circle cx="1047" cy="77" r="12"/><circle cx="1126" cy="212" r="12"/><circle cx="992" cy="271" r="12"/>
+<circle cx="947" cy="157" r="17" fill="#dbc188" stroke="#775a22"/>
+</g>
+</svg>
