@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Documentación · Laboratorio de Grafos y Búsquedas</title>
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="documentacion.css">
+</head>
+<body class="d-flex flex-column min-vh-100">
+<header class="header-section">
+    <div class="container">
+        <a class="course-brand" href="../index.html">
+            <span class="course-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+            Laboratorio de Grafos y Búsquedas
+        </a>
+    </div>
+</header>
+
+<main class="container catalog-main documentation flex-grow-1">
+    <h1 class="catalog-title">Documentación</h1>
+    <p class="documentation-intro">Aprende a usar el laboratorio o consulta cómo ejecutarlo y mantenerlo.</p>
+    <nav class="documentation-index" aria-label="Manuales">
+        <a href="#manual-usuario">Manual de usuario <span aria-hidden="true">↓</span></a>
+        <a href="#manual-tecnico">Manual técnico <span aria-hidden="true">↓</span></a>
+    </nav>
+
+    <article id="manual-usuario" class="panel-section" aria-labelledby="usuario-titulo">
+        <div class="panel-header"><h2 id="usuario-titulo" class="panel-title">Manual de usuario</h2></div>
+
+        <h3>Empieza con un ejemplo</h3>
+        <ol>
+            <li>Abre <a href="../busquedas/busquedas.html">Búsquedas</a> o <a href="../grafos/grafos.html">Grafos</a> y elige un método del catálogo.</li>
+            <li>Pulsa <strong>Ejemplo</strong> en el encabezado del método. El simulador carga los datos de práctica y ejecuta la operación. Si hay una animación, espera a que termine para consultar el resultado.</li>
+            <li>Cambia una clave, un peso o una opción y ejecuta de nuevo la operación para comparar.</li>
+        </ol>
+        <p class="documentation-note"><strong>Antes de cambiar de ejercicio:</strong> usa <strong>Guardar</strong> si quieres conservar el trabajo. <strong>Ejemplo</strong> sustituye los datos del método y <strong>Limpiar</strong> borra la estructura activa.</p>
+
+        <h3>Qué puedes practicar</h3>
+        <dl class="documentation-list">
+            <dt>Búsquedas internas</dt>
+            <dd>Compara búsqueda secuencial y binaria, funciones hash y métodos por residuos. En residuos, elige árbol digital, trie, árbol múltiple o Huffman.</dd>
+            <dt>Búsquedas externas</dt>
+            <dd>Examina búsquedas por bloques, hash externo y estructuras dinámicas. La división en bloques o cubetas forma parte de la visualización.</dd>
+            <dt>Búsquedas por índices</dt>
+            <dd>Configura índices de un nivel o multinivel. Introduce la cantidad de registros, el tamaño de bloque y los tamaños de registro e índice en bytes.</dd>
+            <dt>Grafos</dt>
+            <dd>Construye grafos y practica operaciones, árboles, caminos, matrices, conjuntos y coloreado. El formulario indica si se necesitan pesos y permite elegir la dirección cuando corresponde.</dd>
+        </dl>
+
+        <h3>Práctica guiada de búsqueda</h3>
+        <p>Abre <a href="../busquedas/busquedasInternas/busquedasInternas.html#tab-secuencial">Búsqueda Secuencial</a> y pulsa <strong>Ejemplo</strong>. La clave <strong>45</strong> aparece en la posición <strong>4</strong>, tras cuatro comparaciones. Cambia a <strong>Búsqueda Binaria</strong>, escribe <strong>45</strong> y pulsa <strong>Buscar</strong>. Estas dos pestañas comparten la estructura, así que puedes comparar el recorrido con los mismos datos.</p>
+        <p>Para crear tu propio ejercicio, define la capacidad y los dígitos por clave, pulsa <strong>Crear estructura</strong> e inserta las claves una por una. Respeta la longitud configurada, incluso si la clave empieza por cero.</p>
+
+        <h3>Práctica guiada de grafos</h3>
+        <p>Abre <a href="../grafos/matrices/matrices.html#tab-mia">Matriz de incidencia y adyacencia</a> y pulsa <strong>Ejemplo</strong>. En la matriz de incidencia, las filas representan vértices y las columnas representan aristas. Cambia a <strong>Matriz de adyacencia</strong> y pulsa <strong>Calcular</strong> para comparar ambas vistas con el mismo grafo.</p>
+        <p>Para construir un grafo desde cero, agrega primero los vértices y luego las aristas. Usa los nombres exactos de los extremos y completa el peso si el método lo requiere. Pulsa <strong>Calcular</strong>, <strong>Operar</strong> o <strong>Aplicar algoritmo</strong>, según la pantalla.</p>
+
+        <h3>Guardar, cargar y resolver avisos</h3>
+        <ul>
+            <li><strong>Guardar</strong> descarga un archivo JSON. Para recuperar el ejercicio, vuelve al método que lo generó y usa <strong>Cargar</strong>.</li>
+            <li>Si no aparece un resultado, revisa el aviso junto al formulario. Comprueba la capacidad, los dígitos, la función hash o los extremos de la arista, según el método.</li>
+            <li>En Dijkstra, usa pesos positivos. En Floyd, <strong>−∞</strong> indica que un ciclo de peso negativo permite reducir el costo sin límite para ese par de vértices.</li>
+        </ul>
+        <a href="#manual-tecnico">Ir al manual técnico ↓</a>
+    </article>
+
+    <article id="manual-tecnico" class="panel-section" aria-labelledby="tecnico-titulo">
+        <div class="panel-header"><h2 id="tecnico-titulo" class="panel-title">Manual técnico</h2></div>
+
+        <h3>Ejecución local</h3>
+        <p>El laboratorio es un sitio estático. Los algoritmos, la lectura de archivos y la representación gráfica se ejecutan en el navegador. Bootstrap 5.3.8 y D3 7.9.0 están incluidos en el proyecto. Para servirlo localmente, abre una terminal en la carpeta que contiene <code>index.html</code> y ejecuta:</p>
+        <pre><code>python3 -m http.server 8000 --bind 127.0.0.1</code></pre>
+        <p>Abre <a href="http://localhost:8000/">http://localhost:8000/</a>. Si el puerto está ocupado, elige otro en el comando y en la dirección. Pulsa <kbd>Ctrl</kbd> + <kbd>C</kbd> en la terminal para detener el servidor. El mismo árbol de archivos se puede publicar en un alojamiento estático.</p>
+
+        <h3>Mapa del código</h3>
+        <dl class="documentation-list">
+            <dt><code>index.html</code> y <code>documentacion/</code></dt>
+            <dd>Portada, enlaces a los catálogos y manuales.</dd>
+            <dt><code>busquedas/</code></dt>
+            <dd>Catálogo y módulos de búsquedas internas, externas y por índices. Cada módulo reúne sus formularios, estilos y archivos JavaScript.</dd>
+            <dt><code>grafos/</code></dt>
+            <dd>Catálogo y módulos de operaciones, árboles, algoritmos, matrices, conjuntos y coloreado. D3 representa los grafos y gestiona la interacción con los nodos.</dd>
+            <dt><code>css/global.css</code>, <code>css/navigation.js</code> y <code>css/examples.js</code></dt>
+            <dd>Estilos comunes, menú con enlaces directos a pestañas y datos de práctica. Los ejemplos reutilizan los controles y operaciones de cada módulo.</dd>
+            <dt><code>bootstrap/</code> y <code>d3/</code></dt>
+            <dd>Copias locales de las bibliotecas. Sus rutas relativas deben mantenerse al mover o publicar el sitio.</dd>
+        </dl>
+
+        <h3>Estado y archivos de ejercicios</h3>
+        <p>Los módulos conservan su estado en memoria. Recargar la página reinicia el ejercicio. La importación lee un archivo seleccionado en el navegador y la exportación genera una descarga. No se necesita una cuenta ni una base de datos.</p>
+        <p>Cada módulo define su formato. Por ejemplo, secuencial y binaria internas guardan un objeto con <code>tipo</code>, <code>tamano</code>, <code>digitos</code> y <code>datos</code>. Las claves se almacenan como cadenas para preservar los ceros iniciales.</p>
+        <pre><code>{
+  "tipo": "secuencialBinaria",
+  "tamano": 8,
+  "digitos": 2,
+  "datos": ["03", "12", "45"]
+}</code></pre>
+
+        <h3>Cómo mantener un método</h3>
+        <ol>
+            <li>Ubica su página HTML y el archivo JavaScript que conecta los campos, aplica el algoritmo y dibuja el resultado.</li>
+            <li>Si agregas o renombras una pestaña, revisa su identificador, el panel asociado, el enlace de <code>navigation.js</code> y la entrada correspondiente de <code>examples.js</code>.</li>
+            <li>Si cambia la importación, prueba archivos guardados válidos, datos incompletos y errores de formato. Comprueba que se pueda seguir usando el módulo después de un rechazo.</li>
+        </ol>
+
+        <h3>Verificación antes de publicar</h3>
+        <ul>
+            <li>Abre los catálogos y comprueba que cada enlace directo seleccione la pestaña esperada.</li>
+            <li>Ejecuta <strong>Ejemplo</strong> en los métodos modificados y compara los resultados con un caso conocido.</li>
+            <li>Guarda un ejercicio, recarga, vuelve a cargarlo y comprueba que se recuperen sus datos.</li>
+            <li>Prueba el menú y los formularios con teclado y en una pantalla estrecha. Revisa la consola del navegador si falla un cálculo o falta un recurso.</li>
+        </ul>
+        <a href="#manual-usuario">Volver al manual de usuario ↑</a>
+    </article>
+</main>
+<footer class="footer-section mt-auto">
+    <div class="container d-flex justify-content-between flex-wrap gap-2">
+        <span>Ciencias de la Computación 2 © 2026</span>
+        <span>Develop by ticonsky</span>
+    </div>
+</footer>
+<script src="../bootstrap/js/bootstrap.bundle.js"></script>
+<script src="../css/navigation.js"></script>
+</body>
+</html>

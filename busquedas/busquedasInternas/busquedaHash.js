@@ -93,7 +93,7 @@ function cambiarMetodoColision() {
         const metodoColision = document.getElementById('metodoColision').value;
 
         // Solo inicializar la estructura si no existe o el tamaño cambió
-        if (tamanoTablaHash !== tamano) {
+        if (reiniciar || tamanoTablaHash !== tamano) {
             inicializarEstructuraHash();
         } else {
             // Asegurar que la estructura del método actual exista
@@ -236,7 +236,7 @@ function calcularHash(clave, metodo, tamano) {
 
 // ==================== INICIALIZACIÓN ====================
 
-function inicializarEstructuraHash() {
+function inicializarEstructuraHash(reiniciar = false) {
     limpiarTimeoutsHash();
 
     const tamano = parseInt(document.getElementById('tamanoEstructuraHash').value) || 10;

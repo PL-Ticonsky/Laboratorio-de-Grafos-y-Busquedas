@@ -92,7 +92,6 @@ function limpiarInputsDosGrafos() {
 }
 
 function limpiarUnGrafo() {
-    if (!confirm('¿Limpiar el grafo actual y su resultado?')) return;
     state.un.grafo = { vertices: [], aristas: [] };
     limpiarResultadoUnGrafo();
     limpiarInputsUnGrafo();
@@ -101,7 +100,6 @@ function limpiarUnGrafo() {
 }
 
 function limpiarDosGrafos() {
-    if (!confirm('¿Limpiar G1, G2 y el resultado?')) return;
     state.dos.g1 = { vertices: [], aristas: [] };
     state.dos.g2 = { vertices: [], aristas: [] };
     limpiarResultadoDosGrafos();
@@ -961,7 +959,9 @@ function leerParamsUnGrafo(operacion) {
 }
 
 function bindEventosUnGrafo() {
-    document.getElementById('btnUnLimpiar').addEventListener('click', limpiarUnGrafo);
+    document.getElementById('btnUnLimpiar').addEventListener('click', () => {
+        if (confirm('¿Limpiar el grafo actual y su resultado?')) limpiarUnGrafo();
+    });
     document.getElementById('btnUnGuardar').addEventListener('click', guardarUnGrafo);
     document.getElementById('btnUnCargar').addEventListener('click', cargarUnGrafo);
 
@@ -1041,7 +1041,9 @@ function bindEventosUnGrafo() {
 }
 
 function bindEventosDosGrafos() {
-    document.getElementById('btnDosLimpiar').addEventListener('click', limpiarDosGrafos);
+    document.getElementById('btnDosLimpiar').addEventListener('click', () => {
+        if (confirm('¿Limpiar G1, G2 y el resultado?')) limpiarDosGrafos();
+    });
     document.getElementById('btnDosGuardar').addEventListener('click', guardarDosGrafos);
     document.getElementById('btnDosCargar').addEventListener('click', cargarDosGrafos);
 

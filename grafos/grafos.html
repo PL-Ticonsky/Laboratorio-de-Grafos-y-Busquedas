@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simulador CC2</title>
+    <title>Grafos - Simulador CC2</title>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="../bootstrap/css/bootstrap.css">
@@ -18,9 +18,11 @@
 <header class="header-section mb-4">
     <div class="container">
         <div class="d-flex justify-content-between align-items-center flex-wrap">
-            <div class="text-white">
-                <h1 class="header-title mb-1">Ciencias de la Computación 2</h1>
-            </div>
+            <a class="course-brand" href="../index.html">
+                <span class="course-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+                Laboratorio de Grafos y Búsquedas
+            </a>
+            <h1 class="visually-hidden">Grafos</h1>
             <a href="../index.html" class="btn btn-outline-light">
                 Volver atrás
             </a>
@@ -28,15 +30,16 @@
     </div>
 </header>
 
-<div class="container flex-grow-1 d-flex align-items-center justify-content-center">
+<main class="container catalog-main flex-grow-1">
 
     <!-- Operaciones y Árboles como grafos -->
     <section class="w-100">
+        <h2 class="catalog-title">Grafos</h2>
 
         <div class="row g-4 justify-content-center">
             <!-- Operaciones -->
             <div class="col-lg-3 col-md-6">
-                <a href="operaciones/operaciones.html" class="text-decoration-none">
+                <a href="operaciones/operaciones.html" class="d-block h-100 text-decoration-none">
                     <div class="card card-algoritmo card-tema">
                         <span class="card-label">Operaciones</span>
                     </div>
@@ -45,7 +48,7 @@
 
             <!-- Árboles como grafos -->
             <div class="col-lg-3 col-md-6">
-                <a href="arbolesComoGrafos/arbolesComoGrafos.html" class="text-decoration-none">
+                <a href="arbolesComoGrafos/arbolesComoGrafos.html" class="d-block h-100 text-decoration-none">
                     <div class="card card-algoritmo card-tema">
                         <span class="card-label">Árboles como grafos</span>
                     </div>
@@ -54,7 +57,7 @@
 
             <!-- Algoritmos -->
             <div class="col-lg-3 col-md-6">
-                <a href="algoritmos/algoritmos.html" class="text-decoration-none">
+                <a href="algoritmos/algoritmos.html" class="d-block h-100 text-decoration-none">
                     <div class="card card-algoritmo card-tema">
                         <span class="card-label">Algoritmos</span>
                     </div>
@@ -63,7 +66,7 @@
 
             <!-- Matrices -->
             <div class="col-lg-3 col-md-6">
-                <a href="matrices/matrices.html" class="text-decoration-none">
+                <a href="matrices/matrices.html" class="d-block h-100 text-decoration-none">
                     <div class="card card-algoritmo card-tema">
                         <span class="card-label">Matrices</span>
                     </div>
@@ -72,7 +75,7 @@
 
             <!-- Coloreado -->
             <div class="col-lg-3 col-md-6">
-                <a href="coloreado/coloreado.html" class="text-decoration-none">
+                <a href="coloreado/coloreado.html" class="d-block h-100 text-decoration-none">
                     <div class="card card-algoritmo card-tema">
                         <span class="card-label">Coloreado</span>
                     </div>
@@ -81,7 +84,7 @@
 
             <!-- Conjuntos -->
             <div class="col-lg-3 col-md-6">
-                <a href="conjuntos/conjuntos.html" class="text-decoration-none">
+                <a href="conjuntos/conjuntos.html" class="d-block h-100 text-decoration-none">
                     <div class="card card-algoritmo card-tema">
                         <span class="card-label">Conjuntos</span>
                     </div>
@@ -91,7 +94,7 @@
 
     </section>
 
-</div>
+</main>
 
 <!-- Footer -->
 <footer class="footer-section mt-auto">
@@ -110,5 +113,6 @@
 <!-- Bootstrap JS -->
 <script src="../bootstrap/js/bootstrap.bundle.js"></script>
 
+<script src="../css/navigation.js"></script>
 </body>
 </html>

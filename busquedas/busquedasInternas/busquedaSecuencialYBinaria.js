@@ -881,68 +881,55 @@ function cargarBinaria() {
 
 // ==================== EVENT LISTENERS ====================
 
-document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('fileInputSecuencial').addEventListener('change', function(e) {
-        const file = e.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                try {
-                    const datos = JSON.parse(e.target.result);
-                    if (datos.tipo === 'secuencialBinaria') {
-                        sbTamanoEstructura = datos.tamano;
-                        sbTamanoDigitos = datos.digitos;
-                        estructuraDatos = datos.datos;
-                        sbInicializado = true;
-                        document.getElementById('tamanoEstructuraSecuencial').value = sbTamanoEstructura;
-                        document.getElementById('tamanoSecuencial').value = sbTamanoDigitos;
-                        document.getElementById('tamanoEstructuraBinaria').value = sbTamanoEstructura;
-                        document.getElementById('tamanoBinaria').value = sbTamanoDigitos;
-                    } else {
-                        // Legacy format (plain array)
-                        estructuraDatos = datos;
-                        sbInicializado = true;
-                    }
-                    sincronizarVisualizaciones();
-                    mostrarMensajeSecuencial('Estructura cargada correctamente', 'success');
-                } catch (error) {
-                    mostrarMensajeSecuencial('Error al cargar el archivo', 'danger');
-                }
-            };
-            reader.readAsText(file);
-        }
-        this.value = '';
-    });
+function cargarDatosSecuencialBinaria(archivo) {
+    const legacy = Array.isArray(archivo);
+    if (!legacy && archivo?.tipo !== 'secuencialBinaria') {
+        throw new Error('Formato de búsqueda interna inválido.');
+    }
+    const datos = legacy ? archivo : archivo.datos;
+    const tamano = legacy ? sbTamanoEstructura : archivo.tamano;
+    const digitos = legacy ? sbTamanoDigitos : archivo.digitos;
+    if (!Number.isInteger(tamano) || tamano < 1 || tamano > 100 ||
+        !Number.isInteger(digitos) || digitos < 1 ||
+        !Array.isArray(datos) || datos.length > tamano ||
+        datos.some(clave => typeof clave !== 'string' || clave.length !== digitos || !/^[0-9]+$/.test(clave)) ||
+        new Set(datos).size !== datos.length) {
+        throw new Error('El tamaño, los dígitos o las claves son inválidos.');
+    }
 
-    document.getElementById('fileInputBinaria').addEventListener('change', function(e) {
-        const file = e.target.files[0];
-        if (file) {
+    limpiarTimeouts();
+    sbTamanoEstructura = tamano;
+    sbTamanoDigitos = digitos;
+    estructuraDatos = datos;
+    sbInicializado = true;
+    ['Secuencial', 'Binaria'].forEach(tipo => {
+        document.getElementById('tamanoEstructura' + tipo).value = tamano;
+        document.getElementById('tamano' + tipo).value = digitos;
+    });
+    sincronizarVisualizaciones();
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    ['Secuencial', 'Binaria'].forEach(tipo => {
+        const input = document.getElementById('fileInput' + tipo);
+        input.addEventListener('change', function () {
+            const file = input.files[0];
+            if (!file) return;
+            input.value = '';
             const reader = new FileReader();
-            reader.onload = function(e) {
+            reader.onload = function () {
                 try {
-                    const datos = JSON.parse(e.target.result);
-                    if (datos.tipo === 'secuencialBinaria') {
-                        sbTamanoEstructura = datos.tamano;
-                        sbTamanoDigitos = datos.digitos;
-                        estructuraDatos = datos.datos;
-                        sbInicializado = true;
-                        document.getElementById('tamanoEstructuraSecuencial').value = sbTamanoEstructura;
-                        document.getElementById('tamanoSecuencial').value = sbTamanoDigitos;
-                        document.getElementById('tamanoEstructuraBinaria').value = sbTamanoEstructura;
-                        document.getElementById('tamanoBinaria').value = sbTamanoDigitos;
-                    } else {
-                        estructuraDatos = datos;
-                        sbInicializado = true;
-                    }
-                    sincronizarVisualizaciones();
-                    mostrarMensajeBinaria('Estructura cargada correctamente', 'success');
+                    cargarDatosSecuencialBinaria(JSON.parse(reader.result));
+                    mostrarMensaje(tipo, 'Estructura cargada correctamente', 'success');
                 } catch (error) {
-                    mostrarMensajeBinaria('Error al cargar el archivo', 'danger');
+                    mostrarMensaje(tipo, 'Error al cargar el archivo: ' + error.message, 'danger');
                 }
             };
+            reader.onerror = function () {
+                mostrarMensaje(tipo, 'Error al leer el archivo', 'danger');
+            };
             reader.readAsText(file);
-        }
-        this.value = '';
+        });
     });
 
     // Limpiar resaltados al cambiar de pestaña

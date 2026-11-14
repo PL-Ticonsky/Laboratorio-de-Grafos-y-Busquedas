@@ -21,7 +21,7 @@
 		const head = '<tr><th></th>' + ids.map(function (id) { return '<th>' + id + '</th>'; }).join('') + '</tr>';
 		const body = matrix.map(function (row, i) {
 			const cols = row.map(function (v) {
-				return '<td>' + (Number.isFinite(v) ? v : '&infin;') + '</td>';
+				return '<td>' + (v === -Infinity ? '&minus;&infin;' : Number.isFinite(v) ? v : '&infin;') + '</td>';
 			}).join('');
 			return '<tr><th>' + ids[i] + '</th>' + cols + '</tr>';
 		}).join('');
@@ -138,6 +138,20 @@
 				matrices.push({ name: 'J=' + (j + 1), values: cloneMatrix(d) });
 			}
 
+			const negativeCycleVertices = d.map(function (row, i) { return row[i]; });
+			const hasNegativeCycle = negativeCycleVertices.some(function (value) { return value < 0; });
+			if (hasNegativeCycle) {
+				const finalDistances = d.map(function (row, i) {
+					return row.map(function (value, k) {
+						const affected = negativeCycleVertices.some(function (diagonal, j) {
+							return diagonal < 0 && Number.isFinite(d[i][j]) && Number.isFinite(d[j][k]);
+						});
+						return affected ? -Infinity : value;
+					});
+				});
+				matrices.push({ name: 'Resultado con ciclos de peso negativo', values: finalDistances });
+			}
+
 			U.setHtml('fResultado',
 				'Encuentra los caminos más cortos entre todos los pares de vértices de un grafo ponderado usando la ecuación Dᵢⱼ + Dⱼₖ &lt; Dᵢₖ. ' +
 				(ord.hasCycle ? '<strong>(con circuitos)</strong>' : '')
@@ -151,7 +165,9 @@
 			ord.order.forEach(function (o) { nodeTextMap[o.id] = String(o.ordinal); });
 			U.renderGraph('fGrafoResultado', state.vertices, state.aristas, { nodeTextMap: nodeTextMap, activeNodes: ord.order.map(function (x) { return x.id; }) });
             
-			if (ord.hasCycle) {
+			if (hasNegativeCycle) {
+				U.showMsg('mensajeFloyd', 'Hay ciclos de peso negativo. −∞ indica que el costo puede disminuir sin límite.', 'warning');
+			} else if (ord.hasCycle) {
 				U.showMsg('mensajeFloyd', 'Se etiquetaron aleatoriamente debido a que el grafo presenta circuitos.', 'warning');
 			} else {
 				U.showMsg('mensajeFloyd', 'Floyd aplicado correctamente.', 'success');

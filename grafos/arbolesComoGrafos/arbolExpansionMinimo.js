@@ -105,10 +105,11 @@
 			U.hideMsg('mensajeMST');
 			const a = U.norm(document.getElementById('mAristaInicio').value);
 			const b = U.norm(document.getElementById('mAristaFin').value);
-			const peso = Number(document.getElementById('mAristaPeso').value);
+			const pesoTexto = document.getElementById('mAristaPeso').value.trim();
+			const peso = Number(pesoTexto);
 			if (!a || !b) return U.showMsg('mensajeMST', 'Ingrese inicio y fin.', 'warning');
 			if (a === b) return U.showMsg('mensajeMST', 'No se permiten lazos.', 'warning');
-			if (Number.isNaN(peso)) return U.showMsg('mensajeMST', 'El peso debe ser numerico.', 'warning');
+			if (!pesoTexto || !Number.isFinite(peso)) return U.showMsg('mensajeMST', 'El peso debe ser numerico.', 'warning');
 			if (s.vertices.indexOf(a) === -1 || s.vertices.indexOf(b) === -1) {
 				return U.showMsg('mensajeMST', 'Ambos vertices deben existir.', 'warning');
 			}

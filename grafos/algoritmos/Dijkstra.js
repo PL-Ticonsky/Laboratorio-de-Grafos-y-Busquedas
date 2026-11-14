@@ -216,6 +216,9 @@
 				if (!file) return;
 				U.readJsonFile(file, function (data) {
 					const graph = U.loadGraphFromData(data, true);
+					if (graph.aristas.some(function (edge) { return edge.peso <= 0; })) {
+						throw new Error('Dijkstra requiere pesos positivos en todas las aristas.');
+					}
 					state.vertices = graph.vertices;
 					state.aristas = graph.aristas;
 					U.setHtml('dResultado', 'Datos cargados. Pulse <strong>Aplicar algoritmo</strong>.');

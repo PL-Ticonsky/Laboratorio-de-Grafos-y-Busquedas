@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simulador CC2</title>
+    <title>Búsquedas - Simulador CC2</title>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="../bootstrap/css/bootstrap.css">
@@ -18,9 +18,11 @@
 <header class="header-section mb-4">
     <div class="container">
         <div class="d-flex justify-content-between align-items-center flex-wrap">
-            <div class="text-white">
-                <h1 class="header-title mb-1">Ciencias de la Computación 2</h1>
-            </div>
+            <a class="course-brand" href="../index.html">
+                <span class="course-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+                Laboratorio de Grafos y Búsquedas
+            </a>
+            <h1 class="visually-hidden">Búsquedas</h1>
             <a href="../index.html" class="btn btn-outline-light">
                 Volver atrás
             </a>
@@ -28,15 +30,16 @@
     </div>
 </header>
 
-<div class="container flex-grow-1 d-flex align-items-center justify-content-center">
+<main class="container catalog-main flex-grow-1">
 
     <!-- Busquedas internas, externas y por índices -->
     <section class="w-100">
+        <h2 class="catalog-title">Búsquedas</h2>
 
         <div class="row g-4 justify-content-center">
             <!-- Búsquedas Internas -->
             <div class="col-lg-3 col-md-6">
-                <a href="busquedasInternas/busquedasInternas.html" class="text-decoration-none">
+                <a href="busquedasInternas/busquedasInternas.html" class="d-block h-100 text-decoration-none">
                     <div class="card card-algoritmo card-tema">
                         <span class="card-label">Búsquedas Internas</span>
                     </div>
@@ -45,7 +48,7 @@
 
             <!-- Búsquedas Externas -->
             <div class="col-lg-3 col-md-6">
-                <a href="busquedasExternas/busquedasExternas.html" class="text-decoration-none">
+                <a href="busquedasExternas/busquedasExternas.html" class="d-block h-100 text-decoration-none">
                     <div class="card card-algoritmo card-tema">
                         <span class="card-label">Búsquedas Externas</span>
                     </div>
@@ -54,7 +57,7 @@
 
             <!-- Búsquedas por Índices -->
             <div class="col-lg-3 col-md-6">
-                <a href="busquedasIndices/busquedasIndices.html" class="text-decoration-none">
+                <a href="busquedasIndices/busquedasIndices.html" class="d-block h-100 text-decoration-none">
                     <div class="card card-algoritmo card-tema">
                         <span class="card-label">Búsquedas por Índices</span>
                     </div>
@@ -64,7 +67,7 @@
 
     </section>
 
-</div>
+</main>
 
 <!-- Footer -->
 <footer class="footer-section mt-auto">
@@ -83,5 +86,6 @@
 <!-- Bootstrap JS -->
 <script src="../bootstrap/js/bootstrap.bundle.js"></script>
 
+<script src="../css/navigation.js"></script>
 </body>
 </html>

@@ -437,7 +437,10 @@ function podarArbolDigital(nodo) {
 }
 
 function limpiarDigital() {
-    if (!confirm('¿Limpiar todo el árbol digital?')) return;
+    if (confirm('¿Limpiar todo el árbol digital?')) reiniciarDigital();
+}
+
+function reiniciarDigital() {
     limpiarTimeoutsArr(timeoutsDigital);
     arbolDigital = null;
     document.getElementById('claveDigital').value = '';
@@ -979,7 +982,10 @@ function compactarTries(nodo) {
 }
 
 function limpiarTries() {
-    if (!confirm('¿Limpiar todo el trie?')) return;
+    if (confirm('¿Limpiar todo el trie?')) reiniciarTries();
+}
+
+function reiniciarTries() {
     limpiarTimeoutsArr(timeoutsTries);
     raizTries = null;
     document.getElementById('claveTries').value = '';
@@ -1816,7 +1822,7 @@ function renderizarArbolD3(tipo, arbol, grado = 3) {
         .append('svg')
         .attr('id', `svg${tipo}`)
         .attr('width', ancho)
-        .attr('style', 'overflow: visible; font-family: monospace;');
+        .attr('style', 'overflow: visible; font-family: inherit;');
 
     const g = svg.append('g');
 

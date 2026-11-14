@@ -276,17 +276,25 @@
 		update();
 	}
 
-	function enumerateAllVertexSubsets(vertices) {
+	function enumerateDominatingSets(vertices, adj) {
 		const ids = vertices.map(function (v) { return v.id; }).sort();
 		const out = [];
 		const current = [];
+		const available = new Set(ids);
 		function bt(idx) {
 			if (idx >= ids.length) {
-				out.push(current.slice());
+				if (isDominating(current, vertices, adj)) out.push(current.slice());
 				return;
 			}
-			bt(idx + 1);
-			current.push(ids[idx]);
+			const id = ids[idx];
+			available.delete(id);
+			if (vertices.every(function (v) {
+				return available.has(v.id) || Array.from(adj[v.id]).some(function (neighbor) {
+					return available.has(neighbor);
+				});
+			})) bt(idx + 1);
+			available.add(id);
+			current.push(id);
 			bt(idx + 1);
 			current.pop();
 		}
@@ -360,8 +368,7 @@
 			return showMsg('Ingrese al menos un vértice.', 'warning');
 		}
 		const adj = buildAdjacency(state.vertices, state.aristas);
-		const subsets = enumerateAllVertexSubsets(state.vertices);
-		const dominating = subsets.filter(function (s) { return isDominating(s, state.vertices, adj); });
+		const dominating = enumerateDominatingSets(state.vertices, adj);
 		const minSize = dominating.reduce(function (acc, s) { return Math.min(acc, s.length); }, Infinity);
 		const minSets = dominating.filter(function (s) { return s.length === minSize; });
 		const independentDominating = dominating.filter(function (s) { return isIndependent(s, adj); });

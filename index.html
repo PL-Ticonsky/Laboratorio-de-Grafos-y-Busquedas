@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simulador CC2</title>
+    <title>Laboratorio de Grafos y Búsquedas</title>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
@@ -12,44 +12,70 @@
     <link rel="stylesheet" href="css/global.css">
 </head>
 
-<body class="d-flex flex-column min-vh-100">
+<body class="home-page d-flex flex-column min-vh-100">
 
-<!-- Header -->
 <header class="header-section">
     <div class="container">
-        <div class="text-white text-center py-3">
-            <h1 class="header-title mb-2">Ciencias de la Computación 2</h1>
-        </div>
+        <a class="course-brand" href="index.html">
+            <span class="course-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+            Laboratorio de Grafos y Búsquedas
+        </a>
     </div>
 </header>
 
-<div class="container flex-grow-1 d-flex align-items-center justify-content-center">
+<main class="container home-main flex-grow-1">
+    <section class="home-hero" aria-labelledby="course-title">
+        <div class="hero-copy">
+            <h1 id="course-title">Ciencias de la<br>Computación 2</h1>
+            <p class="hero-description">Practica y visualiza estructuras de búsqueda y algoritmos sobre grafos.</p>
+        </div>
+        <div class="hero-figure" aria-hidden="true">
+            <div class="graph-illustration">
+                <i style="--x: 8%; --y: 56%; --length: 30%; --angle: -59deg"></i>
+                <i style="--x: 8%; --y: 56%; --length: 42%; --angle: 30deg"></i>
+                <i style="--x: 24%; --y: 19%; --length: 36%; --angle: 34deg"></i>
+                <i style="--x: 24%; --y: 19%; --length: 54%; --angle: -9deg"></i>
+                <i style="--x: 44%; --y: 87%; --length: 29%; --angle: -67deg"></i>
+                <i style="--x: 54%; --y: 48%; --length: 34%; --angle: -54deg"></i>
+                <i style="--x: 54%; --y: 48%; --length: 43%; --angle: 24deg"></i>
+                <i style="--x: 77%; --y: 7%; --length: 45%; --angle: 69deg"></i>
+                <b style="--x: 8%; --y: 56%"></b>
+                <b style="--x: 24%; --y: 19%"></b>
+                <b style="--x: 44%; --y: 87%"></b>
+                <b style="--x: 77%; --y: 7%"></b>
+                <b style="--x: 54%; --y: 48%"></b>
+                <b style="--x: 93%; --y: 73%"></b>
+            </div>
+        </div>
+    </section>
 
-    <!-- Busquedas y Grafos -->
-    <section class="w-100">
-
-        <div class="row g-4 justify-content-center">
-            <!-- Búsquedas Internas -->
-            <div class="col-lg-5 col-md-6">
-                <a href="busquedas/busquedas.html" class="text-decoration-none">
-                    <div class="card card-algoritmo card-tema">
+    <section class="home-topics" aria-labelledby="topics-title">
+        <h2 id="topics-title">Módulos</h2>
+        <div class="row g-3">
+            <div class="col-md-6">
+                <a href="busquedas/busquedas.html" class="d-block h-100 text-decoration-none">
+                    <div class="home-shortcut">
                         <span class="card-label">Búsquedas</span>
+                        <span class="topic-detail">Internas, externas y por índices</span>
                     </div>
                 </a>
             </div>
-
-            <!-- Grafos -->
-            <div class="col-lg-5 col-md-6">
-                <a href="grafos/grafos.html" class="text-decoration-none">
-                    <div class="card card-algoritmo card-tema">
+            <div class="col-md-6">
+                <a href="grafos/grafos.html" class="d-block h-100 text-decoration-none">
+                    <div class="home-shortcut">
                         <span class="card-label">Grafos</span>
+                        <span class="topic-detail">Operaciones, caminos, árboles y otras propiedades</span>
                     </div>
                 </a>
             </div>
         </div>
     </section>
-
-</div>
+    <section class="home-about" aria-labelledby="about-title">
+        <h2 id="about-title">Sobre el laboratorio</h2>
+        <p>Este laboratorio se desarrolló para la asignatura Ciencias de la Computación 2 de la Universidad Distrital Francisco José de Caldas.</p>
+        <p>En cada método puedes cargar un caso con el botón <strong>Ejemplo</strong>, modificar los datos y observar cómo cambia el resultado.</p>
+    </section>
+</main>
 
 <!-- Footer -->
 <footer class="footer-section mt-auto">
@@ -59,7 +85,7 @@
                 Ciencias de la Computación 2 &copy; 2026
             </p>
             <p class="text-muted mb-0">
-                Universidad Distrital Francisco José de Caldas
+                Develop by ticonsky
             </p>
         </div>
     </div>
@@ -68,5 +94,6 @@
 <!-- Bootstrap JS -->
 <script src="bootstrap/js/bootstrap.bundle.js"></script>
 
+<script src="css/navigation.js"></script>
 </body>
 </html>

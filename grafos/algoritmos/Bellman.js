@@ -106,24 +106,48 @@
 			});
 			dist[fuente] = 0;
 
-			ord.order.forEach(function (item) {
-				const v = item.id;
-				if (v === fuente) return;
-				const incoming = incomingOf(v);
-				const candidates = [];
-				incoming.forEach(function (e) {
-					if (!Number.isFinite(dist[e.inicio])) return;
-					const val = dist[e.inicio] + Number(e.peso);
-					candidates.push({ from: e.inicio, value: val, peso: e.peso });
+			if (ord.hasCycle) {
+				for (let pass = 1; pass < state.vertices.length; pass += 1) {
+					let changed = false;
+					state.aristas.forEach(function (edge) {
+						const candidate = dist[edge.inicio] + edge.peso;
+						if (candidate < dist[edge.fin]) {
+							dist[edge.fin] = candidate;
+							pred[edge.fin] = edge.inicio;
+							changed = true;
+						}
+					});
+					if (!changed) break;
+				}
+				const hasNegativeCycle = state.aristas.some(function (edge) {
+					return dist[edge.inicio] + edge.peso < dist[edge.fin];
 				});
-				if (!candidates.length) return;
-				candidates.sort(function (a, b) {
-					if (a.value !== b.value) return a.value - b.value;
-					return a.from.localeCompare(b.from);
+				if (hasNegativeCycle) {
+					const message = 'Hay un ciclo de peso negativo alcanzable desde el origen.';
+					U.setHtml('bResultado', message);
+					U.renderGraph('bGrafoResultado', [], [], {});
+					return U.showMsg('mensajeBellman', message, 'danger');
+				}
+			} else {
+				ord.order.forEach(function (item) {
+					const v = item.id;
+					if (v === fuente) return;
+					const incoming = incomingOf(v);
+					const candidates = [];
+					incoming.forEach(function (e) {
+						if (!Number.isFinite(dist[e.inicio])) return;
+						const val = dist[e.inicio] + Number(e.peso);
+						candidates.push({ from: e.inicio, value: val, peso: e.peso });
+					});
+					if (!candidates.length) return;
+					candidates.sort(function (a, b) {
+						if (a.value !== b.value) return a.value - b.value;
+						return a.from.localeCompare(b.from);
+					});
+					dist[v] = candidates[0].value;
+					pred[v] = candidates[0].from;
 				});
-				dist[v] = candidates[0].value;
-				pred[v] = candidates[0].from;
-			});
+			}
 
 			U.setHtml('bResultado', '<strong>Algoritmo aplicado ' + (ord.hasCycle ? '(con circuitos)' : 'correctamente') + '.</strong>');
 

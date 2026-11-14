@@ -1,0 +1,224 @@
+\documentclass[11pt,a4paper]{report}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage[margin=24mm]{geometry}
+\usepackage{graphicx,xcolor,booktabs,tabularx,float,hyperref}
+\definecolor{verde}{HTML}{184B3A}
+\hypersetup{colorlinks=true,linkcolor=verde,urlcolor=verde,pdftitle={Manual de usuario - Laboratorio de Grafos y Búsquedas},pdfauthor={ticonsky}}
+\graphicspath{{capturas/}}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{.45em}
+\newcommand{\boton}[1]{\textbf{#1}}
+\newcommand{\pasos}{\begin{enumerate}}
+\newcommand{\finpasos}{\end{enumerate}}
+\newcommand{\captura}[3]{\begin{figure}[H]\centering
+\includegraphics[width=\linewidth,height=.49\textheight,keepaspectratio]{#1.png}
+\caption{#2}\label{fig:#3}\end{figure}}
+\newcommand{\metodo}[3]{\subsection{#1}\textbf{Datos y acción.} #2\par\textbf{Lectura del resultado.} #3}
+\begin{document}
+\begin{titlepage}
+\color{verde}
+\rule{\textwidth}{1.2pt}
+\vspace*{22mm}
+
+{\Large Ciencias de la Computación 2\par}
+\vspace{12mm}
+{\Huge\bfseries Manual de usuario\par}
+\vspace{5mm}
+{\LARGE Laboratorio de Grafos y Búsquedas\par}
+\vspace{18mm}
+{\large Universidad Distrital Francisco José de Caldas\par}
+\vfill
+{\large Desarrollo del simulador: ticonsky\par}
+{\large Noviembre de 2026\par}
+\vspace{5mm}
+\rule{\textwidth}{1.2pt}
+\end{titlepage}
+\setcounter{tocdepth}{1}
+{\small\tableofcontents}
+
+\chapter{Introducción}
+\section{Propósito y alcance}
+El Laboratorio de Grafos y Búsquedas es un simulador para practicar los contenidos de Ciencias de la Computación 2. Permite introducir datos, aplicar algoritmos y examinar su representación gráfica o tabular. Este manual describe el uso de los 26 métodos accesibles desde los catálogos y documenta ejercicios que se pueden repetir con el botón \boton{Ejemplo}.
+
+\section{Público y convenciones}
+Está dirigido a estudiantes y docentes. Los nombres en \textbf{negrita} identifican controles de la interfaz. Los valores como \texttt{45} o \texttt{A} son datos de ejemplo. Los nombres de los controles pueden variar por módulo, especialmente cuando se pasa de búsquedas a grafos.
+
+\chapter{Acceso y primeros pasos}
+\section{Requisitos y arranque}
+Para usar una copia publicada basta un navegador moderno. Para abrir una copia local por medio de un servidor, se requiere Python 3. Abre una terminal en la carpeta \texttt{SimuladorCC2}, donde está \texttt{index.html}, y ejecuta:
+\begin{verbatim}
+python3 -m http.server 8000 --bind 127.0.0.1
+\end{verbatim}
+Deja abierta esa terminal y entra a \url{http://localhost:8000/}. La dirección raíz abre la portada de la versión actual. Si el puerto \texttt{8000} está ocupado, usa otro número tanto en el comando como en la dirección. Para detener el servidor, presiona \texttt{Ctrl+C} en la terminal.
+
+\section{Navegación}
+\pasos
+\item En la portada, selecciona \boton{Búsquedas} o \boton{Grafos}. Cada catálogo muestra sus métodos agrupados y visibles al cargar.
+\item Selecciona un método. La página abre la pestaña correspondiente. Las pestañas de la parte superior del módulo permiten cambiar de método dentro de la misma familia.
+\item En escritorio, los menús superiores despliegan accesos directos. En pantalla estrecha, los enlaces a los catálogos siguen visibles y \boton{Menú} abre el panel lateral. \boton{Inicio} y el logo regresan a la portada. \boton{Volver atrás} lleva al nivel anterior.
+\item Si necesitas una referencia mientras trabajas, abre \boton{Documentación} para consultar los manuales de la aplicación.
+\finpasos
+\captura{inicio}{Portada del laboratorio y accesos a los dos catálogos.}{inicio}
+\captura{catalogo}{Los métodos de Búsquedas se muestran desde el catálogo.}{catalogo}
+
+\section{Controles y flujo de trabajo}
+\begin{tabularx}{\linewidth}{@{}p{.28\linewidth}X@{}}
+\toprule
+Control & Acción \\
+\midrule
+\boton{Ejemplo} & Sustituye los datos del método, carga un caso de práctica y ejecuta la operación. Espera si hay una animación. \\
+\boton{Crear estructura} & Inicializa la capacidad y el formato de claves. Lee las indicaciones del formulario antes de repetir la operación con datos de trabajo. \\
+\boton{Insertar} / \boton{Agregar} & Registra una clave, vértice o arista con los datos escritos. \\
+\boton{Buscar} & Recorre la estructura para localizar la clave y muestra la coincidencia o el aviso correspondiente. \\
+\boton{Calcular} / \boton{Operar} & Aplica la opción seleccionada a los datos actuales. En algunos métodos se llama \boton{Aplicar algoritmo}. \\
+\boton{Eliminar} / \boton{Limpiar} & Elimina el elemento indicado o reinicia la estructura. Revisa la confirmación si aparece. \\
+\boton{Guardar} / \boton{Cargar} & Descarga un ejercicio en JSON o recupera uno desde un archivo local. \\
+\bottomrule
+\end{tabularx}
+
+\chapter{Búsquedas}
+\section{Búsquedas internas}
+Antes de insertar, crea una estructura y respeta la cantidad de dígitos configurada. Las claves con cero inicial deben escribirse completas.
+
+\metodo{Secuencial}{Define capacidad y longitud, crea la estructura, inserta claves y escribe la que deseas localizar. Pulsa \boton{Buscar}.}{Observa las comparaciones en orden, la posición final y la cantidad de pasos.}
+\metodo{Binaria}{Usa la estructura compartida con Secuencial o crea una propia. Escribe la clave y pulsa \boton{Buscar}.}{La vista ordenada muestra cómo se reduce el intervalo de búsqueda después de cada comparación.}
+\metodo{Hash}{Configura tamaño y dígitos. Selecciona una función y un método de colisión, crea la estructura e inserta claves.}{Lee la posición inicial y la ruta de resolución cuando dos claves coinciden en la misma posición.}
+\metodo{Por residuos}{Elige árbol digital, trie, árbol múltiple o Huffman. En los tres primeros inserta letras de la A a la Z. Para el múltiple, indica el grado y crea el árbol primero. En Huffman, introduce una palabra con al menos dos letras distintas.}{En los árboles se muestra la ruta de bits o grupos de bits. Huffman muestra las frecuencias y los códigos de las letras.}
+
+\section{Búsquedas externas}
+Configura la capacidad y los dígitos de las claves en los métodos que usan bloques. Revisa qué bloques o cubetas recorre la animación.
+\metodo{Secuencial por bloques}{Crea la estructura, inserta claves y busca una de ellas.}{Sigue el recorrido por bloques y la posición de la clave si aparece.}
+\metodo{Binaria por bloques}{Usa los datos compartidos con Secuencial externa o crea la estructura desde esta pestaña.}{El recorrido acota el bloque candidato y luego la posición dentro de ese bloque.}
+\metodo{Hash externo}{Selecciona función y estrategia de colisión. Crea la estructura, inserta y después busca.}{Observa la ubicación en bloques y, según la estrategia, la cadena o el área de desbordamiento.}
+\metodo{Dinámica}{Elige modo total o parcial, número par de cubetas, registros por cubeta y dígitos. Crea la estructura e inserta claves.}{Consulta la ocupación, los cambios de la estructura y la cubeta identificada al buscar.}
+
+\section{Búsquedas por índices}
+\metodo{Un nivel}{Introduce cantidad de registros, tamaño del bloque, tamaño de registro y tamaño de entrada de índice. Los tres tamaños se expresan en bytes. Selecciona primario o secundario y pulsa \boton{Crear estructura}.}{Examina cuántos registros caben por bloque, cuántos bloques se necesitan y cómo se distribuye el índice.}
+\metodo{Multinivel}{Introduce los mismos datos y el tipo de índice. Pulsa \boton{Crear estructura}.}{Lee el número de niveles y los accesos estimados. Contrasta la distribución de registros e índices en el diagrama.}
+
+\chapter{Grafos}
+\section{Preparación del ejercicio}
+\pasos
+\item Agrega cada vértice con un nombre distinto. Para un primer caso, usa nombres cortos como \texttt{A}, \texttt{B} y \texttt{C}.
+\item Agrega las aristas indicando dos vértices existentes. Si la pantalla pide nombre, asigna uno distinto a cada arista. Si hay dirección o peso, revisa su valor antes de agregar.
+\item Elige el tipo de operación, cuando exista un selector. Pulsa el botón de cálculo y examina la notación, el dibujo y las tablas que se presenten.
+\finpasos
+
+\section{Operaciones}
+\metodo{Un grafo}{Construye el grafo, elige una operación y completa los parámetros que aparezcan. Por ejemplo, para fusionar vértices, indica los dos nombres.}{Compara el grafo original con el resultado y revisa los vértices y aristas resultantes.}
+\metodo{Dos grafos}{Construye G1 y G2 en sus formularios. Selecciona una operación, como unión o intersección, y pulsa \boton{Operar}.}{Compara los elementos compartidos o combinados según la operación elegida.}
+
+\section{Árboles como grafos}
+\metodo{Centro o bicentro}{Construye un árbol conexo sin ciclos y pulsa \boton{Hallar centro o bicentro}.}{Identifica el vértice central o el par central marcado en el dibujo.}
+\metodo{Árbol de expansión mínima}{Construye un grafo conexo ponderado. Completa el peso de cada arista y pulsa el botón de cálculo.}{Distingue las aristas elegidas y consulta el peso total.}
+\metodo{Distancia entre dos árboles}{Construye los dos árboles ponderados y pulsa \boton{Hallar distancia}.}{Lee el valor y el desglose que muestra el simulador para esos dos árboles.}
+
+\section{Algoritmos}
+\metodo{Función ordinal}{Introduce un grafo dirigido y pulsa \boton{Aplicar algoritmo}.}{Los números identifican el orden asignado a los vértices. Lee el aviso si hay circuitos.}
+\metodo{Bellman}{Construye un grafo dirigido ponderado y aplica el algoritmo.}{Examina las distancias desde el origen que usa el simulador. Un aviso señala un ciclo negativo alcanzable cuando corresponda.}
+\metodo{Dijkstra}{Agrega aristas dirigidas de peso positivo y aplica el algoritmo.}{Sigue las etiquetas de distancia y predecesor. El camino destacado conecta el primer y último vértice del orden calculado, si existe.}
+\metodo{Floyd}{Introduce un grafo dirigido ponderado y aplica el algoritmo.}{Compara la matriz inicial y las iteraciones. Una entrada infinita distingue un par sin camino. Un valor \(-\infty\) señala que un ciclo negativo permite reducir el costo sin límite.}
+
+\section{Matrices}
+\metodo{Distancia y circuitos}{Elige distancias, circuitos, circuitos fundamentales, cortes o cortes fundamentales. Construye el grafo con la dirección y pesos que correspondan al ejercicio.}{Lee las filas y columnas según el modo activo. Las matrices de distancias relacionan pares de vértices y las de circuitos o cortes describen conjuntos de aristas.}
+\metodo{Incidencia y adyacencia}{Construye un grafo sin peso, selecciona el tipo de matriz y pulsa \boton{Calcular}.}{En incidencia, las filas representan vértices y las columnas aristas. En adyacencia, ambos ejes representan vértices.}
+
+\section{Conjuntos}
+\metodo{Independencia}{Construye el grafo y pulsa \boton{Calcular}.}{Examina conjuntos de vértices no adyacentes y distingue los de mayor tamaño.}
+\metodo{Dominancia}{Construye el grafo y calcula.}{Lee los conjuntos que cubren a todos los vértices y el número de dominación. Se muestran también las variantes independiente y conexa cuando existen.}
+\metodo{Pareamiento}{Agrega vértices y aristas y calcula.}{Identifica los conjuntos de aristas que no comparten extremos y los pareamientos de mayor tamaño.}
+
+\section{Coloreado}
+\metodo{Vértices}{Abre la pestaña \boton{Vértices}, construye el grafo y pulsa \boton{Calcular}.}{Dos vértices adyacentes tienen colores distintos. Consulta la cantidad de colores indicada.}
+\metodo{Aristas}{Abre \boton{Aristas}, construye el grafo y calcula.}{Las aristas que comparten un extremo tienen colores distintos. Revisa el índice cromático mostrado.}
+
+\chapter{Prácticas ilustradas}
+Las capturas de este capítulo se tomaron en el simulador al cargar sus ejemplos integrados. Las instrucciones indican qué datos y resultados deben localizarse en cada vista.
+
+\section{Búsqueda secuencial y comparación con binaria}
+\pasos
+\item Abre \boton{Búsquedas}, \boton{Búsquedas internas} y \boton{Secuencial}.
+\item Pulsa \boton{Ejemplo}. La capacidad se fija en 8, las claves tienen 2 dígitos y la consulta es \texttt{45}.
+\item Espera el final de la animación. La fila destacada y el mensaje muestran la posición \textbf{4} y \textbf{4 pasos} (figura~\ref{fig:secuencial}).
+\item Cambia a \boton{Búsqueda Binaria}. Escribe \texttt{45} en su campo y pulsa \boton{Buscar} para comparar los recorridos con los mismos datos.
+\finpasos
+\captura{secuencial}{Ejemplo de búsqueda secuencial con la clave 45 encontrada.}{secuencial}
+
+\clearpage
+\section{Búsqueda binaria por bloques}
+\pasos
+\item En \boton{Búsquedas externas}, abre \boton{Binaria} y pulsa \boton{Ejemplo}.
+\item Observa la capacidad de 16 registros, las claves de 3 dígitos y la consulta \texttt{179}.
+\item Sigue los bloques inspeccionados y localiza \texttt{179} en el resultado. Compara esta posición con el orden de las claves en la figura~\ref{fig:bloques}.
+\finpasos
+\captura{bloques}{Búsqueda binaria externa con bloques y resultado de la consulta.}{bloques}
+
+\section{Índice multinivel}
+\pasos
+\item En \boton{Búsquedas por índices}, abre \boton{Multinivel} y pulsa \boton{Ejemplo}.
+\item Lee los parámetros del formulario: 320 registros, bloques de 256 bytes, registros de 32 bytes y entradas de índice de 16 bytes.
+\item Con el índice primario se obtienen 8 registros por bloque de datos y 40 bloques. La vista muestra dos niveles de índice y tres accesos contando el bloque de datos.
+\finpasos
+\captura{indices}{Cálculo de bloques, niveles y accesos del índice primario.}{indices}
+
+\clearpage
+\section{Incidencia y adyacencia con el mismo grafo}
+\pasos
+\item Abre \boton{Grafos}, \boton{Matrices}, y luego \boton{Incidencia y adyacencia}.
+\item Elige \boton{Matriz de incidencia} y pulsa \boton{Ejemplo}. Verás tres vértices (A, B y C) unidos por tres aristas. Busca sus nombres en los encabezados de la matriz.
+\item Elige \boton{Matriz de adyacencia} y pulsa \boton{Calcular}. Comprueba que ahora los encabezados horizontales también sean vértices (figura~\ref{fig:adyacencia}).
+\finpasos
+\captura{grafo-matrices}{Grafo dirigido del ejemplo de matrices.}{grafo-matrices}
+\captura{incidencia}{Matriz de incidencia del ejemplo integrado.}{incidencia}
+\captura{adyacencia}{Matriz de adyacencia calculada con los mismos datos.}{adyacencia}
+
+\clearpage
+\section{Caminos y coloreado}
+\pasos
+\item Abre \boton{Grafos}, \boton{Algoritmos}, \boton{Dijkstra}. Pulsa \boton{Ejemplo}.
+\item Compara el camino directo de A a C, de costo 7, con el camino A--B--C, de costo \(2+3=5\). Identifica el segundo en el grafo de resultado (figura~\ref{fig:dijkstra}).
+\item Abre \boton{Grafos}, \boton{Coloreado}, \boton{Vértices} y pulsa \boton{Ejemplo}. En el triángulo, cada vértice es adyacente a los otros dos. Verifica que se utilizan tres colores (figura~\ref{fig:coloreado}).
+\finpasos
+\captura{dijkstra}{Grafo de salida del ejemplo de Dijkstra.}{dijkstra}
+\captura{coloreado}{Tres colores en los vértices del triángulo.}{coloreado}
+
+\chapter{Conservar y recuperar ejercicios}
+\section{Guardar y volver a cargar}
+\pasos
+\item Pulsa \boton{Guardar} en el módulo donde tienes el ejercicio. Ubica el archivo JSON en la carpeta de descargas o el destino configurado.
+\item Para recuperarlo, abre el mismo módulo y pulsa \boton{Cargar}. Selecciona el archivo que guardaste.
+\item Comprueba las claves, vértices o parámetros visibles. Si la pantalla indica que el cálculo está pendiente, vuelve a pulsar \boton{Calcular}, \boton{Operar} o \boton{Aplicar algoritmo}.
+\finpasos
+
+\section{Reemplazar los datos}
+Guarda los ejercicios que quieras conservar antes de usar \boton{Ejemplo}, limpiar la estructura o recargar la página. Si el objetivo es quitar un solo elemento, indica su clave o nombre y usa \boton{Eliminar}. En un grafo, revisa también las aristas asociadas al vértice eliminado.
+
+\chapter{Solución de problemas}
+\begin{tabularx}{\linewidth}{@{}p{.32\linewidth}X@{}}
+\toprule
+Situación & Qué hacer \\
+\midrule
+La página local no abre & Comprueba que el servidor esté en ejecución, que lo hayas iniciado desde la raíz del simulador y que el puerto coincida con el de la dirección. \\
+No se puede insertar una clave & Revisa que exista una estructura y que queden posiciones libres. Comprueba la cantidad exacta de dígitos y si la clave ya está registrada. \\
+Una arista es rechazada & Agrega primero ambos vértices, escribe sus nombres tal como aparecen y completa nombre, dirección o peso cuando se soliciten. \\
+No aparece el resultado & Lee el mensaje del método. Algunos algoritmos requieren un grafo conexo, un árbol sin ciclos o pesos positivos. Espera a que termine la animación si está en curso. \\
+No se puede cargar un archivo & Selecciona el JSON exportado por el mismo método. Comprueba que el archivo esté completo y que conserve el formato de sus datos. \\
+\bottomrule
+\end{tabularx}
+
+\chapter{Glosario}
+\begin{description}
+\item[Clave] Valor que identifica un registro y se utiliza para buscarlo.
+\item[Bloque] Grupo de registros tratado como unidad en búsquedas externas o índices.
+\item[Cubeta] Espacio donde una función de dispersión ubica uno o varios registros.
+\item[Colisión] Coincidencia de dos claves en la misma posición hash.
+\item[Índice] Estructura auxiliar que permite localizar registros o bloques.
+\item[Vértice y arista] Un vértice es un nodo. Una arista conecta dos nodos y puede tener dirección o peso.
+\item[Peso] Valor de una arista que representa un costo o distancia.
+\item[Camino y ciclo] Un camino recorre aristas entre vértices. Un ciclo regresa a su vértice inicial.
+\item[Árbol] Grafo no dirigido, conexo y sin ciclos.
+\item[JSON] Formato de archivo de texto utilizado para intercambiar ejercicios.
+\end{description}
+\end{document}
