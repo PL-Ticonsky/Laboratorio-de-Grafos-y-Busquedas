@@ -7,20 +7,18 @@
 </p>
 
 <p align="center">
-  <a href="#demo"><strong>Ver demo</strong></a> ·
+  <a href="LICENSE"><img src="https://img.shields.io/badge/licencia-GPL%20v3-184b3a" alt="Licencia GPL v3"></a>
+  <a href="#módulos"><img src="https://img.shields.io/badge/m%C3%A9todos-26-184b3a" alt="26 métodos"></a>
+  <a href="manuales/manual-usuario.pdf"><img src="https://img.shields.io/badge/manual-PDF-775a22" alt="Manual de usuario en PDF"></a>
+  <a href="docs/licencias.md"><img src="https://img.shields.io/badge/visualizaci%C3%B3n-D3%207-52675c" alt="Visualización con D3 7"></a>
+</p>
+
+<p align="center">
+  <a href="#galería"><strong>Ver capturas</strong></a> ·
   <a href="#arranque-local">Iniciar el simulador</a> ·
   <a href="manuales/manual-usuario.pdf">Manual de usuario (PDF)</a> ·
   <a href="#módulos">Explorar los módulos</a>
 </p>
-
-## Demo
-
-**La misma clave, dos recorridos.** Pulsa **Ejemplo** en cada método para cargar la misma estructura de seis claves y buscar `45`. Las grabaciones muestran cómo la búsqueda secuencial recorre la lista y cómo la binaria acota el intervalo.
-
-| Búsqueda secuencial | Búsqueda binaria |
-| :---: | :---: |
-| <img src="docs/media/secuencial.gif" alt="La búsqueda secuencial recorre las claves hasta encontrar 45" width="460"> | <img src="docs/media/binaria.gif" alt="La búsqueda binaria reduce el intervalo hasta encontrar 45" width="460"> |
-| Posición 4, cuatro pasos. | Posición 4, tres pasos. |
 
 ## Galería
 
