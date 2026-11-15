@@ -54,13 +54,25 @@
 
 Los **26 métodos** incluyen un botón **Ejemplo** para comenzar con datos preparados. Puedes cambiar los datos, volver a ejecutar el método y guardar el ejercicio en JSON desde los módulos que ofrecen esa opción.
 
+## Del ejercicio al resultado
+
+Puedes partir de un ejemplo o introducir tus propios datos. El algoritmo se ejecuta en el navegador y cada módulo presenta el resultado en el formato que corresponde.
+
+```mermaid
+flowchart LR
+    A["Datos propios o ejemplo"] --> B["Elige un método"]
+    B --> C["Algoritmo en JavaScript"]
+    C --> D["Grafo interactivo con D3"]
+    C --> E["Tablas, matrices o índices"]
+```
+
 ## Arranque local
 
 Clona el repositorio y ejecuta estos comandos desde la terminal. El servidor local requiere Python 3.
 
 ```bash
-git clone https://github.com/PL-Ticonsky/SimuladorCC2.git
-cd SimuladorCC2
+git clone https://github.com/PL-Ticonsky/Laboratorio-de-Grafos-y-Busquedas.git
+cd Laboratorio-de-Grafos-y-Busquedas
 python3 -m http.server 8000 --bind 127.0.0.1
 ```
 
